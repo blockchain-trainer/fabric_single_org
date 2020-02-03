@@ -1,0 +1,16 @@
+OrdererOrgs:
+  - Name: Orderer
+    Domain: auomni.com
+    EnableNodeOUs: true
+    Specs:
+      - Hostname: orderer
+
+PeerOrgs:
+  - Name: companyName
+    Domain: companyNamenet.companyName.com
+    EnableNodeOUs: true
+    Template:
+      Count: 1
+    Users:
+      Count: 1
+
