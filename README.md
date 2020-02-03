@@ -20,8 +20,8 @@ docker ps -a
 
 
 docker system prune
-docker volume rm auomninet_orderer.auomni.com
-docker volume rm auomninet_peer0.auomninet.auomni.com
+docker volume rm companyNamenet_orderer.companyName.com
+docker volume rm companyNamenet_peer0.companyNamenet.companyName.com
 rm -R channel-artifacts/
 rm -R crypto-config/
 mkdir channel-artifacts
@@ -41,7 +41,7 @@ export CHANNEL_ONE_NAME=companyNamechannel
 export CHANNEL_ONE_PROFILE=companyNamechannelProfile
 
 ../../fabric-samples/bin/configtxgen -profile ${CHANNEL_ONE_PROFILE} -outputCreateChannelTx ./channel-artifacts/${CHANNEL_ONE_NAME}.tx -channelID $CHANNEL_ONE_NAME
-../../fabric-samples/bin/configtxgen -profile ${CHANNEL_ONE_PROFILE} -outputAnchorPeersUpdate ./channel-artifacts/auomniMSPanchors_${CHANNEL_ONE_NAME}.tx -channelID $CHANNEL_ONE_NAME -asOrg auomniMSP
+../../fabric-samples/bin/configtxgen -profile ${CHANNEL_ONE_PROFILE} -outputAnchorPeersUpdate ./channel-artifacts/companyNameMSPanchors_${CHANNEL_ONE_NAME}.tx -channelID $CHANNEL_ONE_NAME -asOrg companyNameMSP
 
 
 
@@ -54,7 +54,7 @@ docker-compose up
 docker exec -it cli bash 
 
 export ORDERER_CA=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/ordererOrganizations/companyName.com/orderers/orderer.companyName.com/msp/tlscacerts/tlsca.companyName.com-cert.pem
-peer channel create -o orderer.companyName.com:7050 -c auomnichannel -f /opt/gopath/src/github.com/hyperledger/fabric/peer/channel-artifacts/companyNamechannel.tx --tls --cafile $ORDERER_CA
+peer channel create -o orderer.companyName.com:7050 -c companyNamechannel -f /opt/gopath/src/github.com/hyperledger/fabric/peer/channel-artifacts/companyNamechannel.tx --tls --cafile $ORDERER_CA
 
 peer channel join -b companyNamechannel.block --tls --cafile $ORDERER_CA
 
